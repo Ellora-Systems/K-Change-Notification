@@ -6,18 +6,8 @@ void main() => runApp(Notifications());
 class Notifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<NotificationModel> listModel = new List();
-
-    for (int i = 0; i < 6; i++) {
-      NotificationModel model = new NotificationModel();
-      model.title = "Welcome";
-      model.date = "" + (i + 1).toString() + " March";
-      model.message = "This is  " + (i + 1).toString() + " Message.";
-      listModel.add(model);
-    }
-
     return MaterialApp(
-      home: NotificationPage(listModel),
+      home: NotificationPage(),
     );
   }
 }
@@ -29,12 +19,6 @@ class NotificationModel {
 }
 
 class NotificationPage extends StatefulWidget {
-  List<NotificationModel> listModel;
-
-  NotificationPage(List<NotificationModel> listModel) {
-    this.listModel = listModel;
-  }
-
   @override
   State<StatefulWidget> createState() {
     return NotificationState();
@@ -42,7 +26,7 @@ class NotificationPage extends StatefulWidget {
 }
 
 class NotificationState extends State<NotificationPage> {
-  NotificationState();
+  List<NotificationModel> listModel = getListModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,10 +120,9 @@ class NotificationState extends State<NotificationPage> {
                     ),
                     Container(
                       child: ListView.builder(
-                        itemCount: widget.listModel.length,
+                        itemCount: 6,
                         itemBuilder: (context, position) {
-                          NotificationModel model = widget.listModel[position];
-                          return listItem(model);
+                          return listItem();
                         },
                       ),
                     ),
@@ -156,9 +139,13 @@ class NotificationState extends State<NotificationPage> {
       ),
     );
   }
+
+  static List<NotificationModel> getListModel() {
+    return [];
+  }
 }
 
-Widget listItem(NotificationModel model) {
+Widget listItem() {
   return Container(
     margin: EdgeInsets.only(top: 10),
     height: 100,
@@ -173,7 +160,7 @@ Widget listItem(NotificationModel model) {
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Text(
-                model.title,
+                "model.title",
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
             ),
@@ -182,7 +169,7 @@ Widget listItem(NotificationModel model) {
                 alignment: AlignmentDirectional.centerEnd,
                 margin: EdgeInsets.only(right: 16),
                 child: Text(
-                  model.date,
+                  "model.date",
                   style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
@@ -197,7 +184,7 @@ Widget listItem(NotificationModel model) {
           ),
           alignment: AlignmentDirectional.topStart,
           child: Text(
-            model.message,
+            "model.message",
             style: TextStyle(
               color: Colors.black,
               fontSize: 18,
