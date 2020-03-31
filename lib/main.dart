@@ -23,7 +23,7 @@ class NotificationModel {
 
 class NotificationPage extends StatefulWidget {
   List<NotificationModel> noticationModel = getListModel();
-  bool isNew = false;
+  bool isNew = true;
 
   @override
   State<StatefulWidget> createState() {
@@ -41,119 +41,105 @@ List<NotificationModel> getListModel() {
 }
 
 class NotificationState extends State<NotificationPage> {
-  void newShown(bool isWew) {
-    setState(() {
-      if (widget.isNew) {
-        widget.isNew = false;
-      } else {
-        widget.isNew = true;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[600],
       body: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+        child: Stack(
           children: <Widget>[
             Container(
-              height: 80.0,
-              margin: EdgeInsets.only(
-                top: 25,
-                left: 20,
-                right: 20,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      print("on back pressed");
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: AlignmentDirectional.center,
-                      child: Text(
-                        "Notifications",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
+              child: Image.asset('assets/notification_top_bar.jpg'),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Container(
+                  height: 140.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          width: 80,
+                          margin: EdgeInsets.only(top: 25, left: 10),
+                          child: Icon(Icons.arrow_back,
+                              size: 30, color: Color(0xFF201e20)),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(top: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 25),
+                          child: Text(
+                            "Notification",
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Color(0xFF4a4424),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    InkWell(
-                        onTap: () {
-                          newShown(widget.isNew);
-                        },
-                        child: Container(
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
                           alignment: AlignmentDirectional.topStart,
                           margin: EdgeInsets.only(
-                            top: 26,
-                            left: 20,
+                            top: 32,
+                            left: 35,
                             right: 16,
                           ),
                           child: Text(
                             'Notifications',
                             style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
+                                color: Color(0xFF2b2b2b),
+                                fontSize: 19,
                                 fontWeight: FontWeight.w500),
                           ),
-                        )),
-                    widget.isNew
-                        ? Container(
-                            alignment: AlignmentDirectional.topStart,
-                            margin: EdgeInsets.only(
-                              top: 15,
-                              left: 20,
-                              right: 16,
-                            ),
-                            child: Text(
-                              'New',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
-                            ),
-                          )
-                        : Container(),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      child: ListView.builder(
-                        itemCount: widget.noticationModel.length,
-                        itemBuilder: (context, position) {
-                          return listItem(widget.noticationModel[position]);
-                        },
-                      ),
-                    )
-                  ],
+                        ),
+                        widget.isNew
+                            ? Container(
+                                alignment: AlignmentDirectional.topStart,
+                                margin: EdgeInsets.only(
+                                  top: 15,
+                                  left: 35,
+                                  right: 16,
+                                ),
+                                child: Text(
+                                  'New',
+                                  style: TextStyle(
+                                      color: Color(0xFFa5a5a5),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              )
+                            : Container(),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.6,
+                          child: ListView.builder(
+                            itemCount: widget.noticationModel.length,
+                            itemBuilder: (context, position) {
+                              return listItem(widget.noticationModel[position]);
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -166,13 +152,15 @@ Widget listItem(NotificationModel model) {
   return Column(
     children: <Widget>[
       Container(
-        margin: EdgeInsets.only(top: 9),
+        margin: EdgeInsets.only(
+          top: 9,
+        ),
         height: 2,
-        color: Colors.black26,
+        color: Color(0xFFedeff3),
       ),
       Container(
         height: 100,
-        color: Colors.grey[200],
+        color: Color(0xFFF3F4F5),
         alignment: AlignmentDirectional.centerStart,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -181,36 +169,37 @@ Widget listItem(NotificationModel model) {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 20),
+                  margin: EdgeInsets.only(left: 35),
                   child: Text(model.title,
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Color(0xFF2d2f30),
                           fontSize: 19,
-                          fontWeight: FontWeight.bold)),
+                          fontWeight: FontWeight.w500)),
                 ),
                 Expanded(
                   child: Container(
                     alignment: AlignmentDirectional.centerEnd,
-                    margin: EdgeInsets.only(right: 16),
-                    child: Text(
-                      model.date,
-                      style: TextStyle(color: Colors.black, fontSize: 15),
-                    ),
+                    margin: EdgeInsets.only(right: 25),
+                    child: Text(model.date,
+                        style: TextStyle(
+                            color: Color(0xFF7c7e7f),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400)),
                   ),
                 ),
               ],
             ),
             Container(
               margin: EdgeInsets.only(
-                top: 20,
-                left: 20,
+                top: 10,
+                left: 35,
                 right: 18,
               ),
               alignment: AlignmentDirectional.topStart,
               child: Text(
                 model.message,
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Color(0xFF333436),
                   fontSize: 18,
                 ),
               ),
@@ -220,7 +209,7 @@ Widget listItem(NotificationModel model) {
       ),
       Container(
         height: 2,
-        color: Colors.black26,
+        color: Color(0xFFedeff3),
       )
     ],
   );
