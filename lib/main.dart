@@ -48,7 +48,9 @@ class NotificationState extends State<NotificationPage> {
         child: Stack(
           children: <Widget>[
             Container(
-              child: Image.asset('assets/notification_top_bar.jpg'),
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset('assets/notification_top_bar.png',
+                  fit: BoxFit.fill),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
@@ -59,11 +61,14 @@ class NotificationState extends State<NotificationPage> {
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Container(
-                          width: 80,
-                          margin: EdgeInsets.only(top: 25, left: 10),
-                          child: Icon(Icons.arrow_back,
-                              size: 30, color: Color(0xFF201e20)),
+                        child: InkWell(
+                          splashColor: Colors.grey,
+                          child: Container(
+                            width: 80,
+                            margin: EdgeInsets.only(top: 25, left: 10),
+                            child: Icon(Icons.arrow_back,
+                                size: 35, color: Color(0xFF201e20)),
+                          ),
                         ),
                       ),
                       Align(
@@ -169,8 +174,9 @@ Widget listItem(NotificationModel model) {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 35),
+                  margin: EdgeInsets.only(left: 35, top: 6),
                   child: Text(model.title,
+                      maxLines: 1,
                       style: TextStyle(
                           color: Color(0xFF2d2f30),
                           fontSize: 19,
@@ -179,7 +185,7 @@ Widget listItem(NotificationModel model) {
                 Expanded(
                   child: Container(
                     alignment: AlignmentDirectional.centerEnd,
-                    margin: EdgeInsets.only(right: 25),
+                    margin: EdgeInsets.only(right: 25, top: 6),
                     child: Text(model.date,
                         style: TextStyle(
                             color: Color(0xFF7c7e7f),
@@ -198,6 +204,7 @@ Widget listItem(NotificationModel model) {
               alignment: AlignmentDirectional.topStart,
               child: Text(
                 model.message,
+                maxLines: 2,
                 style: TextStyle(
                   color: Color(0xFF333436),
                   fontSize: 18,
