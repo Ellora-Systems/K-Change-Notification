@@ -23,6 +23,7 @@ class NotificationModel {
 
 class NotificationPage extends StatefulWidget {
   List<NotificationModel> noticationModel = getListModel();
+  bool isNew = false;
 
   @override
   State<StatefulWidget> createState() {
@@ -32,14 +33,24 @@ class NotificationPage extends StatefulWidget {
 
 List<NotificationModel> getListModel() {
   return [
-    NotificationModel("title 1", "Mar 1", "message 1"),
-    NotificationModel("title 2", "Mar 2", "message 2"),
-    NotificationModel("title 3", "Mar 3", "message 3"),
-    NotificationModel("title 4", "Mar 4", "message 4")
+    NotificationModel("Welcome 1", "Mar 1", "message 1"),
+    NotificationModel("Welcome 2", "Mar 2", "message 2"),
+    NotificationModel("Welcome 3", "Mar 3", "message 3"),
+    NotificationModel("Welcome 4", "Mar 4", "message 4")
   ];
 }
 
 class NotificationState extends State<NotificationPage> {
+  void newShown(bool isWew) {
+    setState(() {
+      if (widget.isNew) {
+        widget.isNew = false;
+      } else {
+        widget.isNew = true;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +60,9 @@ class NotificationState extends State<NotificationPage> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
-              height: 100.0,
+              height: 80.0,
               margin: EdgeInsets.only(
-                top: 20,
+                top: 25,
                 left: 20,
                 right: 20,
               ),
@@ -95,36 +106,42 @@ class NotificationState extends State<NotificationPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Container(
-                      alignment: AlignmentDirectional.topStart,
-                      margin: EdgeInsets.only(
-                        top: 16,
-                        left: 20,
-                        right: 16,
-                      ),
-                      child: Text(
-                        'Notifications',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    Container(
-                      alignment: AlignmentDirectional.topStart,
-                      margin: EdgeInsets.only(
-                        top: 15,
-                        left: 20,
-                        right: 16,
-                      ),
-                      child: Text(
-                        'New',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
+                    InkWell(
+                        onTap: () {
+                          newShown(widget.isNew);
+                        },
+                        child: Container(
+                          alignment: AlignmentDirectional.topStart,
+                          margin: EdgeInsets.only(
+                            top: 26,
+                            left: 20,
+                            right: 16,
+                          ),
+                          child: Text(
+                            'Notifications',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        )),
+                    widget.isNew
+                        ? Container(
+                            alignment: AlignmentDirectional.topStart,
+                            margin: EdgeInsets.only(
+                              top: 15,
+                              left: 20,
+                              right: 16,
+                            ),
+                            child: Text(
+                              'New',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                            ),
+                          )
+                        : Container(),
                     Container(
                       height: MediaQuery.of(context).size.height * 0.6,
                       child: ListView.builder(
@@ -149,13 +166,13 @@ Widget listItem(NotificationModel model) {
   return Column(
     children: <Widget>[
       Container(
-        margin: EdgeInsets.only(top: 6),
+        margin: EdgeInsets.only(top: 9),
         height: 2,
-        color: Colors.grey[100],
+        color: Colors.black26,
       ),
       Container(
         height: 100,
-        color: Colors.blue[100],
+        color: Colors.grey[200],
         alignment: AlignmentDirectional.centerStart,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -165,10 +182,11 @@ Widget listItem(NotificationModel model) {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(left: 20),
-                  child: Text(
-                    model.title,
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
+                  child: Text(model.title,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold)),
                 ),
                 Expanded(
                   child: Container(
@@ -202,7 +220,7 @@ Widget listItem(NotificationModel model) {
       ),
       Container(
         height: 2,
-        color: Colors.grey[100],
+        color: Colors.black26,
       )
     ],
   );
