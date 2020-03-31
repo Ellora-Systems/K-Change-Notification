@@ -7,6 +7,7 @@ class Notifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: NotificationPage(),
     );
   }
@@ -16,17 +17,29 @@ class NotificationModel {
   String title;
   String date;
   String message;
+
+  NotificationModel(this.title, this.date, this.message);
 }
 
 class NotificationPage extends StatefulWidget {
+  List<NotificationModel> noticationModel = getListModel();
+
   @override
   State<StatefulWidget> createState() {
     return NotificationState();
   }
 }
 
+List<NotificationModel> getListModel() {
+  return [
+    NotificationModel("title 1", "Mar 1", "message 1"),
+    NotificationModel("title 2", "Mar 2", "message 2"),
+    NotificationModel("title 3", "Mar 3", "message 3"),
+    NotificationModel("title 4", "Mar 4", "message 4")
+  ];
+}
+
 class NotificationState extends State<NotificationPage> {
-  List<NotificationModel> listModel = getListModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,24 +125,14 @@ class NotificationState extends State<NotificationPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(
-                        top: 15,
-                      ),
-                      height: 2,
-                      color: Colors.grey,
-                    ),
-                    Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
                       child: ListView.builder(
-                        itemCount: 6,
+                        itemCount: widget.noticationModel.length,
                         itemBuilder: (context, position) {
-                          return listItem();
+                          return listItem(widget.noticationModel[position]);
                         },
                       ),
-                    ),
-                    Container(
-                      height: 2,
-                      color: Colors.grey,
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -139,15 +142,11 @@ class NotificationState extends State<NotificationPage> {
       ),
     );
   }
-
-  static List<NotificationModel> getListModel() {
-    return [];
-  }
 }
 
-Widget listItem() {
+Widget listItem(NotificationModel model) {
   return Container(
-    margin: EdgeInsets.only(top: 10),
+    margin: EdgeInsets.only(top: 6),
     height: 100,
     color: Colors.blue[100],
     alignment: AlignmentDirectional.centerStart,
@@ -160,7 +159,7 @@ Widget listItem() {
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Text(
-                "model.title",
+                model.title,
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
             ),
@@ -169,7 +168,7 @@ Widget listItem() {
                 alignment: AlignmentDirectional.centerEnd,
                 margin: EdgeInsets.only(right: 16),
                 child: Text(
-                  "model.date",
+                  model.date,
                   style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
@@ -184,7 +183,7 @@ Widget listItem() {
           ),
           alignment: AlignmentDirectional.topStart,
           child: Text(
-            "model.message",
+            model.message,
             style: TextStyle(
               color: Colors.black,
               fontSize: 18,
