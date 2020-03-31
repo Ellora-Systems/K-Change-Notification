@@ -43,12 +43,13 @@ class NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[700],
+      backgroundColor: Colors.yellow[600],
       body: Container(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
+              height: 100.0,
               margin: EdgeInsets.only(
                 top: 20,
                 left: 20,
@@ -87,8 +88,8 @@ class NotificationState extends State<NotificationPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                 ),
                 child: Column(
@@ -125,7 +126,7 @@ class NotificationState extends State<NotificationPage> {
                       ),
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.6,
                       child: ListView.builder(
                         itemCount: widget.noticationModel.length,
                         itemBuilder: (context, position) {
@@ -145,52 +146,64 @@ class NotificationState extends State<NotificationPage> {
 }
 
 Widget listItem(NotificationModel model) {
-  return Container(
-    margin: EdgeInsets.only(top: 6),
-    height: 100,
-    color: Colors.blue[100],
-    alignment: AlignmentDirectional.centerStart,
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Row(
-          mainAxisSize: MainAxisSize.max,
+  return Column(
+    children: <Widget>[
+      Container(
+        margin: EdgeInsets.only(top: 6),
+        height: 2,
+        color: Colors.grey[100],
+      ),
+      Container(
+        height: 100,
+        color: Colors.blue[100],
+        alignment: AlignmentDirectional.centerStart,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Text(
-                model.title,
-                style: TextStyle(color: Colors.black, fontSize: 16),
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Text(
+                    model.title,
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: AlignmentDirectional.centerEnd,
+                    margin: EdgeInsets.only(right: 16),
+                    child: Text(
+                      model.date,
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: Container(
-                alignment: AlignmentDirectional.centerEnd,
-                margin: EdgeInsets.only(right: 16),
-                child: Text(
-                  model.date,
-                  style: TextStyle(color: Colors.black, fontSize: 15),
+            Container(
+              margin: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 18,
+              ),
+              alignment: AlignmentDirectional.topStart,
+              child: Text(
+                model.message,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
                 ),
               ),
             ),
           ],
         ),
-        Container(
-          margin: EdgeInsets.only(
-            top: 20,
-            left: 20,
-            right: 18,
-          ),
-          alignment: AlignmentDirectional.topStart,
-          child: Text(
-            model.message,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-            ),
-          ),
-        ),
-      ],
-    ),
+      ),
+      Container(
+        height: 2,
+        color: Colors.grey[100],
+      )
+    ],
   );
 }
