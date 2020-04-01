@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'cart.dart';
 
 void main() => runApp(Notifications());
 
@@ -62,6 +63,12 @@ class NotificationState extends State<NotificationPage> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CartMain()));
+                          },
                           splashColor: Colors.grey,
                           child: Container(
                             width: 80,
