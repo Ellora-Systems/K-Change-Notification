@@ -1,5 +1,9 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:toast/toast.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CartMain extends StatelessWidget {
   @override
@@ -14,8 +18,16 @@ class CartMain extends StatelessWidget {
 }
 
 class Cart extends StatefulWidget {
+  List<String> assetImagesList = [
+    "assets/watch_1.jpg",
+    "assets/watch_2.jpg",
+    "assets/watch_3.jpg"
+  ];
+
   @override
-  _CartState createState() => _CartState();
+  _CartState createState() {
+    return _CartState();
+  }
 }
 
 class _CartState extends State<Cart> {
@@ -23,34 +35,49 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.35,
-          child: Image.asset(
-            'assets/notification_top_bar.png',
-            fit: BoxFit.fitWidth,
-          ),
+        CarouselSlider(
+          height: MediaQuery.of(context).size.height * 35,
+          items: widget.assetImagesList.map((i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.35,
+                      child: Image(
+                        image: AssetImage(i),
+                        fit: BoxFit.fill,
+                      ),
+                    ));
+              },
+            );
+          }).toList(),
         ),
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: EdgeInsets.all(30),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 35,
-            ),
-          ),
+              padding: EdgeInsets.all(30),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 35,
+                ),
+              )),
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.72,
+          height: MediaQuery.of(context).size.height * 0.63,
           margin:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.28),
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.33),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
           child: Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(top: 30, left: 35, right: 20),
@@ -192,26 +219,38 @@ class _CartState extends State<Cart> {
                     ),
                   )),
                   Container(
-                      margin: EdgeInsets.only(bottom: 15),
                       height: 50,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Color(0xFFFFC603)),
                       width: MediaQuery.of(context).size.width,
                       alignment: Alignment.bottomCenter,
-                      child: Center(
-                          child: Text(
-                        "Start to chat",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
+                      child: InkWell(
+                        onTap: () {
+                          Toast.show("start to chat", context);
+                        },
+                        splashColor: Colors.grey,
+                        child: Center(
+                            child: Text(
+                          "Start to chat",
+                          style: TextStyle(
                             color: Color(0xFF1F1F36),
                             fontSize: 19,
-                            fontWeight: FontWeight.w600),
-                      )))
+                          ),
+                        )),
+                      ))
                 ],
               )),
         )
       ],
     );
   }
+}
+
+Widget getImageView(String i, BuildContext context) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    child: Image.asset('assets/watch_1.jpg'),
+  );
 }
