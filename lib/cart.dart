@@ -35,43 +35,31 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        CarouselSlider(
-          height: MediaQuery.of(context).size.height * 35,
-          items: widget.assetImagesList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      child: Image(
-                        image: AssetImage(i),
-                        fit: BoxFit.fill,
-                      ),
-                    ));
-              },
-            );
-          }).toList(),
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-              padding: EdgeInsets.all(30),
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
+        Container(
+          height: MediaQuery.of(context).size.height * 0.35,
+          child: CarouselSlider(
+            height: MediaQuery.of(context).size.height * 0.35,
+            items: widget.assetImagesList.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.35,
+                        child: Image(
+                          image: AssetImage(i),
+                          fit: BoxFit.cover,
+                        ),
+                      ));
                 },
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 35,
-                ),
-              )),
+              );
+            }).toList(),
+          ),
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.63,
+          height: MediaQuery.of(context).size.height * 0.67,
           margin:
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.33),
           decoration: BoxDecoration(
@@ -220,6 +208,8 @@ class _CartState extends State<Cart> {
                   )),
                   Container(
                       height: 50,
+                      margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height * 0.04),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Color(0xFFFFC603)),
@@ -241,16 +231,23 @@ class _CartState extends State<Cart> {
                       ))
                 ],
               )),
-        )
+        ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+              padding: EdgeInsets.all(30),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 35,
+                ),
+              )),
+        ),
       ],
     );
   }
-}
-
-Widget getImageView(String i, BuildContext context) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: MediaQuery.of(context).size.height,
-    child: Image.asset('assets/watch_1.jpg'),
-  );
 }
