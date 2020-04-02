@@ -36,6 +36,7 @@ class _CartState extends State<Cart> {
     return Stack(
       children: <Widget>[
         Container(
+          width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.35,
           child: CarouselSlider(
             height: MediaQuery.of(context).size.height * 0.35,
@@ -46,6 +47,7 @@ class _CartState extends State<Cart> {
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
                       child: Container(
+                        width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.35,
                         child: Image(
                           image: AssetImage(i),
@@ -86,7 +88,7 @@ class _CartState extends State<Cart> {
                   ),
                   Container(
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(top: 15),
+                    margin: EdgeInsets.only(top: 20, bottom: 6),
                     child: Text(
                       "Location Criteria",
                       textAlign: TextAlign.left,
@@ -118,7 +120,7 @@ class _CartState extends State<Cart> {
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Posted by  ",
@@ -129,18 +131,18 @@ class _CartState extends State<Cart> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      "Ulagapandi U",
-                      style: TextStyle(
-                          color: Color(0xFF656565),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    child: Text("Ulagapandi U",
+                        style: TextStyle(
+                            color: Color(0xFF656565),
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Category",
@@ -151,18 +153,18 @@ class _CartState extends State<Cart> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      "Fashion and Accessories",
-                      style: TextStyle(
-                          color: Color(0xFF656565),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    child: Text("Fashion and Accessories",
+                        style: TextStyle(
+                            color: Color(0xFF656565),
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Condition",
@@ -173,18 +175,18 @@ class _CartState extends State<Cart> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      "New",
-                      style: TextStyle(
-                          color: Color(0xFF656565),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    child: Text("New",
+                        style: TextStyle(
+                            color: Color(0xFF656565),
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Description",
@@ -196,20 +198,20 @@ class _CartState extends State<Cart> {
                   ),
                   Expanded(
                       child: Container(
-                    margin: EdgeInsets.only(top: 9),
+                    margin: EdgeInsets.only(top: 10),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Fashion and Accessories",
+                      "Just used it couble of times. Brand name and Brown color. No scratch looks like new",
                       style: TextStyle(
                           color: Color(0xFF656565),
                           fontSize: 17,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w400),
                     ),
                   )),
                   Container(
                       height: 50,
                       margin: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.height * 0.04),
+                          bottom: MediaQuery.of(context).size.height * 0.03),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Color(0xFFFFC603)),
